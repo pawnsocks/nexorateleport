@@ -1,0 +1,200 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B00100000000000000000000 /* NexoraTeleportApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00100000000000000000000 /* NexoraTeleportApp.swift */; };
+		B00200000000000000000000 /* DomainModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00200000000000000000000 /* DomainModels.swift */; };
+		B00300000000000000000000 /* StateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00300000000000000000000 /* StateStore.swift */; };
+		B00400000000000000000000 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00400000000000000000000 /* KeychainStore.swift */; };
+		B00500000000000000000000 /* LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00500000000000000000000 /* LocationServices.swift */; };
+		B00600000000000000000000 /* MapServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00600000000000000000000 /* MapServices.swift */; };
+		B00700000000000000000000 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00700000000000000000000 /* Engine.swift */; };
+		B00800000000000000000000 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00800000000000000000000 /* AppModel.swift */; };
+		B00900000000000000000000 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00900000000000000000000 /* RootView.swift */; };
+		B01000000000000000000000 /* MapHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01000000000000000000000 /* MapHomeView.swift */; };
+		B01100000000000000000000 /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01100000000000000000000 /* RoutesView.swift */; };
+		B01200000000000000000000 /* RoutinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01200000000000000000000 /* RoutinesView.swift */; };
+		B01300000000000000000000 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01300000000000000000000 /* StatusView.swift */; };
+		B01400000000000000000000 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01400000000000000000000 /* SettingsView.swift */; };
+		B01500000000000000000000 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A01500000000000000000000 /* Assets.xcassets */; };
+		B01600000000000000000000 /* FeatureModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01600000000000000000000 /* FeatureModels.swift */; };
+		B01700000000000000000000 /* FeatureServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01700000000000000000000 /* FeatureServices.swift */; };
+		B01800000000000000000000 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01800000000000000000000 /* TodayView.swift */; };
+		B01900000000000000000000 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01900000000000000000000 /* HistoryView.swift */; };
+		B02000000000000000000000 /* ProfilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02000000000000000000000 /* ProfilesView.swift */; };
+		B02100000000000000000000 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02100000000000000000000 /* MoreView.swift */; };
+		B02200000000000000000000 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02200000000000000000000 /* OnboardingView.swift */; };
+		B02300000000000000000000 /* RoutePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02300000000000000000000 /* RoutePreviewView.swift */; };
+		B02400000000000000000000 /* TeleportActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02400000000000000000000 /* TeleportActivityAttributes.swift */; };
+		B02500000000000000000000 /* LiveActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02500000000000000000000 /* LiveActivityService.swift */; };
+		B02600000000000000000000 /* TeleportActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02400000000000000000000 /* TeleportActivityAttributes.swift */; };
+		B02700000000000000000000 /* NexoraTeleportWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02600000000000000000000 /* NexoraTeleportWidgets.swift */; };
+		B02800000000000000000000 /* NexoraTeleportWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D00000000000000000000001 /* NexoraTeleportWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A00100000000000000000000 /* NexoraTeleportApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/NexoraTeleportApp.swift; sourceTree = "<group>"; };
+		A00200000000000000000000 /* DomainModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/DomainModels.swift; sourceTree = "<group>"; };
+		A00300000000000000000000 /* StateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/StateStore.swift; sourceTree = "<group>"; };
+		A00400000000000000000000 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/KeychainStore.swift; sourceTree = "<group>"; };
+		A00500000000000000000000 /* LocationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/LocationServices.swift; sourceTree = "<group>"; };
+		A00600000000000000000000 /* MapServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/MapServices.swift; sourceTree = "<group>"; };
+		A00700000000000000000000 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/Engine.swift; sourceTree = "<group>"; };
+		A00800000000000000000000 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/AppModel.swift; sourceTree = "<group>"; };
+		A00900000000000000000000 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/RootView.swift; sourceTree = "<group>"; };
+		A01000000000000000000000 /* MapHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/MapHomeView.swift; sourceTree = "<group>"; };
+		A01100000000000000000000 /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/RoutesView.swift; sourceTree = "<group>"; };
+		A01200000000000000000000 /* RoutinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/RoutinesView.swift; sourceTree = "<group>"; };
+		A01300000000000000000000 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/StatusView.swift; sourceTree = "<group>"; };
+		A01400000000000000000000 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/SettingsView.swift; sourceTree = "<group>"; };
+		A01500000000000000000000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C00000000000000000000014 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C00000000000000000000001 /* NexoraTeleport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = NexoraTeleport.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A01600000000000000000000 /* FeatureModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/FeatureModels.swift; sourceTree = "<group>"; };
+		A01700000000000000000000 /* FeatureServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/FeatureServices.swift; sourceTree = "<group>"; };
+		A01800000000000000000000 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/TodayView.swift; sourceTree = "<group>"; };
+		A01900000000000000000000 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/HistoryView.swift; sourceTree = "<group>"; };
+		A02000000000000000000000 /* ProfilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/ProfilesView.swift; sourceTree = "<group>"; };
+		A02100000000000000000000 /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/MoreView.swift; sourceTree = "<group>"; };
+		A02200000000000000000000 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/OnboardingView.swift; sourceTree = "<group>"; };
+		A02300000000000000000000 /* RoutePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/RoutePreviewView.swift; sourceTree = "<group>"; };
+		A02400000000000000000000 /* TeleportActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/TeleportActivityAttributes.swift; sourceTree = "<group>"; };
+		A02500000000000000000000 /* LiveActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/LiveActivityService.swift; sourceTree = "<group>"; };
+		A02600000000000000000000 /* NexoraTeleportWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetExtension/NexoraTeleportWidgets.swift; sourceTree = "<group>"; };
+		A02700000000000000000000 /* Widget Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WidgetExtension/Info.plist; sourceTree = "<group>"; };
+		D00000000000000000000001 /* NexoraTeleportWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; path = NexoraTeleportWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXContainerItemProxy section */
+		D00000000000000000000011 = {isa = PBXContainerItemProxy; containerPortal = C00000000000000000000002 /* Project object */; proxyType = 1; remoteGlobalIDString = D00000000000000000000002; remoteInfo = NexoraTeleportWidgets; };
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D00000000000000000000010 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B02800000000000000000000 /* NexoraTeleportWidgets.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C00000000000000000000005 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		D00000000000000000000004 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C00000000000000000000003 = {isa = PBXGroup; children = (
+				A00100000000000000000000 /* NexoraTeleportApp.swift */,
+				A00200000000000000000000 /* DomainModels.swift */,
+				A00300000000000000000000 /* StateStore.swift */,
+				A00400000000000000000000 /* KeychainStore.swift */,
+				A00500000000000000000000 /* LocationServices.swift */,
+				A00600000000000000000000 /* MapServices.swift */,
+				A00700000000000000000000 /* Engine.swift */,
+				A00800000000000000000000 /* AppModel.swift */,
+				A00900000000000000000000 /* RootView.swift */,
+				A01000000000000000000000 /* MapHomeView.swift */,
+				A01100000000000000000000 /* RoutesView.swift */,
+				A01200000000000000000000 /* RoutinesView.swift */,
+				A01300000000000000000000 /* StatusView.swift */,
+				A01400000000000000000000 /* SettingsView.swift */,
+				A01600000000000000000000 /* FeatureModels.swift */,
+				A01700000000000000000000 /* FeatureServices.swift */,
+				A01800000000000000000000 /* TodayView.swift */,
+				A01900000000000000000000 /* HistoryView.swift */,
+				A02000000000000000000000 /* ProfilesView.swift */,
+				A02100000000000000000000 /* MoreView.swift */,
+				A02200000000000000000000 /* OnboardingView.swift */,
+				A02300000000000000000000 /* RoutePreviewView.swift */,
+				A02400000000000000000000 /* TeleportActivityAttributes.swift */,
+				A02500000000000000000000 /* LiveActivityService.swift */,
+				A02600000000000000000000 /* NexoraTeleportWidgets.swift */,
+				A02700000000000000000000 /* Widget Info.plist */,
+				A01500000000000000000000 /* Assets.xcassets */,
+				C00000000000000000000014 /* Info.plist */,
+			); path = NexoraTeleport; sourceTree = "<group>"; };
+		C00000000000000000000015 /* Products */ = {isa = PBXGroup; children = (C00000000000000000000001 /* NexoraTeleport.app */, D00000000000000000000001 /* NexoraTeleportWidgets.appex */,); name = Products; sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXTargetDependency section */
+		D00000000000000000000012 = {isa = PBXTargetDependency; target = D00000000000000000000002 /* NexoraTeleportWidgets */; targetProxy = D00000000000000000000011; };
+/* End PBXTargetDependency section */
+
+/* Begin PBXNativeTarget section */
+		C00000000000000000000007 /* NexoraTeleport */ = {isa = PBXNativeTarget; buildConfigurationList = C00000000000000000000009; buildPhases = (C00000000000000000000004,C00000000000000000000005,C00000000000000000000006,D00000000000000000000010); buildRules = (); dependencies = (D00000000000000000000012,); name = NexoraTeleport; productName = NexoraTeleport; productReference = C00000000000000000000001; productType = "com.apple.product-type.application"; };
+		D00000000000000000000002 /* NexoraTeleportWidgets */ = {isa = PBXNativeTarget; buildConfigurationList = D00000000000000000000006; buildPhases = (D00000000000000000000003,D00000000000000000000004,D00000000000000000000005); buildRules = (); dependencies = (); name = NexoraTeleportWidgets; productName = NexoraTeleportWidgets; productReference = D00000000000000000000001 /* NexoraTeleportWidgets.appex */; productType = "com.apple.product-type.app-extension"; };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C00000000000000000000002 /* Project object */ = {isa = PBXProject; attributes = {BuildIndependentTargetsInParallel = 1; LastSwiftUpdateCheck = 1600; LastUpgradeCheck = 1600; TargetAttributes = {C00000000000000000000007 = {CreatedOnToolsVersion = 16.0; }; D00000000000000000000002 = {CreatedOnToolsVersion = 16.0; }; }; }; buildConfigurationList = C00000000000000000000008; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = C00000000000000000000003; productRefGroup = C00000000000000000000015; projectDirPath = ""; projectRoot = ""; targets = (C00000000000000000000007,D00000000000000000000002); };
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C00000000000000000000006 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (
+				B01500000000000000000000 /* Assets.xcassets in Resources */,
+			); runOnlyForDeploymentPostprocessing = 0; };
+		D00000000000000000000005 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C00000000000000000000004 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
+				B00100000000000000000000 /* NexoraTeleportApp.swift in Sources */,
+				B00200000000000000000000 /* DomainModels.swift in Sources */,
+				B00300000000000000000000 /* StateStore.swift in Sources */,
+				B00400000000000000000000 /* KeychainStore.swift in Sources */,
+				B00500000000000000000000 /* LocationServices.swift in Sources */,
+				B00600000000000000000000 /* MapServices.swift in Sources */,
+				B00700000000000000000000 /* Engine.swift in Sources */,
+				B00800000000000000000000 /* AppModel.swift in Sources */,
+				B00900000000000000000000 /* RootView.swift in Sources */,
+				B01000000000000000000000 /* MapHomeView.swift in Sources */,
+				B01100000000000000000000 /* RoutesView.swift in Sources */,
+				B01200000000000000000000 /* RoutinesView.swift in Sources */,
+				B01300000000000000000000 /* StatusView.swift in Sources */,
+				B01400000000000000000000 /* SettingsView.swift in Sources */,
+				B01600000000000000000000 /* FeatureModels.swift in Sources */,
+				B01700000000000000000000 /* FeatureServices.swift in Sources */,
+				B01800000000000000000000 /* TodayView.swift in Sources */,
+				B01900000000000000000000 /* HistoryView.swift in Sources */,
+				B02000000000000000000000 /* ProfilesView.swift in Sources */,
+				B02100000000000000000000 /* MoreView.swift in Sources */,
+				B02200000000000000000000 /* OnboardingView.swift in Sources */,
+				B02300000000000000000000 /* RoutePreviewView.swift in Sources */,
+				B02400000000000000000000 /* TeleportActivityAttributes.swift in Sources */,
+				B02500000000000000000000 /* LiveActivityService.swift in Sources */,
+
+			); runOnlyForDeploymentPostprocessing = 0; };
+		D00000000000000000000003 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
+				B02600000000000000000000 /* TeleportActivityAttributes.swift in Sources */,
+				B02700000000000000000000 /* NexoraTeleportWidgets.swift in Sources */,
+			); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C00000000000000000000010 = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; SWIFT_VERSION = 5.0; }; name = Debug; };
+		C00000000000000000000011 = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; SWIFT_VERSION = 5.0; }; name = Release; };
+		C00000000000000000000012 = {isa = XCBuildConfiguration; buildSettings = {ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 2; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = NexoraTeleport/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 2.0.0; PRODUCT_BUNDLE_IDENTIFIER = com.nexora.teleport; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = 1; }; name = Debug; };
+		C00000000000000000000013 = {isa = XCBuildConfiguration; buildSettings = {ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 2; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = NexoraTeleport/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 2.0.0; PRODUCT_BUNDLE_IDENTIFIER = com.nexora.teleport; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_COMPILATION_MODE = wholemodule; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = 1; VALIDATE_PRODUCT = YES; }; name = Release; };
+		D00000000000000000000007 = {isa = XCBuildConfiguration; buildSettings = {APPLICATION_EXTENSION_API_ONLY = YES; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 2; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = NexoraTeleport/WidgetExtension/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 2.0.0; PRODUCT_BUNDLE_IDENTIFIER = com.nexora.teleport.widgets; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SKIP_INSTALL = YES; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = 1; }; name = Debug; };
+		D00000000000000000000008 = {isa = XCBuildConfiguration; buildSettings = {APPLICATION_EXTENSION_API_ONLY = YES; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 2; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = NexoraTeleport/WidgetExtension/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 2.0.0; PRODUCT_BUNDLE_IDENTIFIER = com.nexora.teleport.widgets; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SKIP_INSTALL = YES; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_COMPILATION_MODE = wholemodule; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = 1; VALIDATE_PRODUCT = YES; }; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C00000000000000000000008 = {isa = XCConfigurationList; buildConfigurations = (C00000000000000000000010,C00000000000000000000011); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		C00000000000000000000009 = {isa = XCConfigurationList; buildConfigurations = (C00000000000000000000012,C00000000000000000000013); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		D00000000000000000000006 = {isa = XCConfigurationList; buildConfigurations = (D00000000000000000000007,D00000000000000000000008); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+
+	};
+	rootObject = C00000000000000000000002 /* Project object */;
+}
