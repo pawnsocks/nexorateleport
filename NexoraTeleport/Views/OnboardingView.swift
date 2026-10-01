@@ -9,21 +9,32 @@ struct OnboardingView: View {
     var body: some View {
         VStack(spacing: 24) {
             Spacer()
-            Image(systemName: icon).font(.system(size: 64)).foregroundStyle(.indigo)
-            Text(title).font(.largeTitle.bold()).multilineTextAlignment(.center)
-            Text(message).foregroundStyle(.secondary).multilineTextAlignment(.center).padding(.horizontal, 28)
+            Image(systemName: icon)
+                .font(.system(size: 64))
+                .foregroundStyle(.indigo)
+            Text(title)
+                .font(.largeTitle.bold())
+                .multilineTextAlignment(.center)
+            Text(message)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 28)
             Spacer()
-            Button(page == 2 ? "Finish" : "Continue") {
+
+            Button(page == 2 ? "Open Teleport" : "Continue") {
                 if page == 0 { model.location.requestPermissions() }
-                if page < 2 { page += 1 }
-                else {
+                if page < 2 {
+                    page += 1
+                } else {
                     complete = true
                     model.preferences.liveWhenIdle = true
                     model.applyPreferences()
                     dismiss()
                 }
             }
-            .buttonStyle(.borderedProminent).controlSize(.large)
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+
             if page > 0 { Button("Back") { page -= 1 } }
         }
         .padding()
@@ -31,16 +42,18 @@ struct OnboardingView: View {
     }
 
     private var title: String {
-        ["Location Permission", "Live & Background", "Ready to Go"][page]
+        ["Allow Location", "Pick a Target", "You're Ready"][page]
     }
+
     private var message: String {
         [
-            "Nexora Teleport uses your device location for the Live screen and route tools.",
-            "Live can stay useful without an active route. Background location is only enabled while an active route needs it.",
-            "Create places and routes, then build routines, profiles and exception days."
+            "Allow location access so Nexora can show your current iPhone position and build routes from where you are.",
+            "On Teleport, search for a city, street, postcode, or landmark. Tap a result and it becomes your Target.",
+            "The main screen always shows Current, Target, Live ON/OFF, and route controls. Start and stop everything from one place."
         ][page]
     }
+
     private var icon: String {
-        ["location.fill", "waveform.path.ecg", "checkmark.circle.fill"][page]
+        ["location.fill", "mappin.and.ellipse", "checkmark.circle.fill"][page]
     }
 }
