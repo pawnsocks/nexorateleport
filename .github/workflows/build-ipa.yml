@@ -1,0 +1,82 @@
+name: Build Nexora Teleport IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build unsigned IPA
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: |
+          xcodebuild -version
+          xcode-select -p
+
+      - name: Show project schemes
+        run: |
+          xcodebuild \
+            -project NexoraTeleport.xcodeproj \
+            -list
+
+      - name: Build Nexora Teleport
+        run: |
+          set -o pipefail
+
+          xcodebuild \
+            -project NexoraTeleport.xcodeproj \
+            -scheme NexoraTeleport \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination "generic/platform=iOS" \
+            -derivedDataPath "$PWD/build" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
+
+      - name: Find built app
+        run: |
+          echo "Searching for NexoraTeleport.app..."
+
+          APP_PATH=$(find "$PWD/build" -type d -name "NexoraTeleport.app" | head -n 1)
+
+          if [ -z "$APP_PATH" ]; then
+            echo "ERROR: NexoraTeleport.app was not found."
+            find "$PWD/build" -maxdepth 6 -type d -name "*.app" -print || true
+            exit 1
+          fi
+
+          echo "Found app:"
+          echo "$APP_PATH"
+          echo "APP_PATH=$APP_PATH" >> "$GITHUB_ENV"
+
+      - name: Create unsigned IPA
+        run: |
+          rm -rf "$PWD/ipa"
+          mkdir -p "$PWD/ipa/Payload"
+
+          cp -R "$APP_PATH" "$PWD/ipa/Payload/NexoraTeleport.app"
+
+          cd "$PWD/ipa"
+          zip -r -9 "$PWD/NexoraTeleport-unsigned.ipa" Payload
+
+      - name: Verify IPA
+        run: |
+          ls -lh NexoraTeleport-unsigned.ipa
+          unzip -l NexoraTeleport-unsigned.ipa | head -n 50
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: NexoraTeleport-unsigned-IPA
+          path: NexoraTeleport-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 7
