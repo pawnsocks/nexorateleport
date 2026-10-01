@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build Nexora Teleport 2.1.1
+    name: Build Nexora Teleport 2.2.0
     runs-on: macos-15
 
     steps:
@@ -19,6 +19,7 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          import re
 
           replacements = {
               "NexoraTeleport/Services/Engine.swift": [
@@ -74,21 +75,23 @@ jobs:
 
           project = Path("NexoraTeleport.xcodeproj/project.pbxproj")
           text = project.read_text()
-          import re
-          text = re.sub(r"CURRENT_PROJECT_VERSION = [^;]+;", "CURRENT_PROJECT_VERSION = 4;", text)
-          text = re.sub(r"MARKETING_VERSION = [^;]+;", "MARKETING_VERSION = 2.1.1;", text)
+          text = re.sub(r"CURRENT_PROJECT_VERSION = [^;]+;", "CURRENT_PROJECT_VERSION = 5;", text)
+          text = re.sub(r"MARKETING_VERSION = [^;]+;", "MARKETING_VERSION = 2.2.0;", text)
           project.write_text(text)
           PY
 
-      - name: Install Nexora app icon
+      - name: Install user-provided app icon
         run: |
           set -euo pipefail
           ICON_DIR="$GITHUB_WORKSPACE/NexoraTeleport/Assets.xcassets/AppIcon.appiconset"
-          SOURCE="$RUNNER_TEMP/Nexora-AppIcon-Source.png"
+          SOURCE="$RUNNER_TEMP/Nexora-Teleport-Icon.png"
 
-          curl --fail --location --retry 3 \
-            "https://raw.githubusercontent.com/pawnsocks/nexoraipa/main/NexoraHost-AppIcon-Source.png" \
-            --output "$SOURCE"
+          cat \
+            "$GITHUB_WORKSPACE/BuildAssets/icon.part1" \
+            "$GITHUB_WORKSPACE/BuildAssets/icon.part2" \
+            "$GITHUB_WORKSPACE/BuildAssets/icon.part3" \
+            "$GITHUB_WORKSPACE/BuildAssets/icon.part4" \
+            | /usr/bin/base64 -D > "$SOURCE"
 
           test -s "$SOURCE"
           sips -g pixelWidth -g pixelHeight "$SOURCE"
@@ -165,8 +168,9 @@ jobs:
           echo "Version: $SHORT_VERSION ($VERSION)"
           echo "Executable: $EXECUTABLE"
 
+          test "$SHORT_VERSION" = "2.2.0"
+          test "$VERSION" = "5"
           test -n "$BUNDLE_ID"
-          test -n "$VERSION"
           test -n "$EXECUTABLE"
           test -f "$APP_PATH/$EXECUTABLE"
 
@@ -180,16 +184,16 @@ jobs:
           cp -R "$APP_PATH" "$GITHUB_WORKSPACE/ipa/Payload/NexoraTeleport.app"
 
           cd "$GITHUB_WORKSPACE/ipa"
-          /usr/bin/zip -r -9 "$GITHUB_WORKSPACE/NexoraTeleport-2.1.1-unsigned.ipa" Payload
+          /usr/bin/zip -r -9 "$GITHUB_WORKSPACE/NexoraTeleport-2.2.0-unsigned.ipa" Payload
 
           cd "$GITHUB_WORKSPACE"
-          unzip -t NexoraTeleport-2.1.1-unsigned.ipa
-          ls -lh NexoraTeleport-2.1.1-unsigned.ipa
+          unzip -t NexoraTeleport-2.2.0-unsigned.ipa
+          ls -lh NexoraTeleport-2.2.0-unsigned.ipa
 
       - name: Upload IPA
         uses: actions/upload-artifact@v4
         with:
-          name: NexoraTeleport-2.1.1-unsigned-IPA
-          path: NexoraTeleport-2.1.1-unsigned.ipa
+          name: NexoraTeleport-2.2.0-unsigned-IPA
+          path: NexoraTeleport-2.2.0-unsigned.ipa
           if-no-files-found: error
           retention-days: 7
