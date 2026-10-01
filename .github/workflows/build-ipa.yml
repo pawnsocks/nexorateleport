@@ -1,15 +1,138 @@
-name: Nexora Teleport Build
+name: Build Nexora Teleport IPA
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
+    name: Build Nexora Teleport 2.1.1
     runs-on: macos-15
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Build
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare source for Xcode 16.4
         run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              "NexoraTeleport/Services/Engine.swift": [
+                  (
+                      "runtime.targetDates = Dictionary(uniqueKeysWithValues: keep)",
+                      "runtime.targetDates = Dictionary(uniqueKeysWithValues: keep.map { ($0.key, $0.value) })",
+                  ),
+              ],
+              "NexoraTeleport/Views/StatusView.swift": [
+                  (
+                      'LabeledContent("Speed", value: "\\(location.speedKmh, specifier: "%.1f") km/h")',
+                      'LabeledContent("Speed", value: "\\(location.speedKmh.formatted(.number.precision(.fractionLength(1)))) km/h")',
+                  ),
+              ],
+              "NexoraTeleport/Views/TodayView.swift": [
+                  (
+                      'metric("Speed", "\\(route.targetSpeedKmh, specifier: "%.0f") km/h")',
+                      'metric("Speed", "\\(route.targetSpeedKmh.formatted(.number.precision(.fractionLength(0)))) km/h")',
+                  ),
+                  (
+                      'metric("Speed", "\\(location.speedKmh, specifier: "%.1f") km/h")',
+                      'metric("Speed", "\\(location.speedKmh.formatted(.number.precision(.fractionLength(1)))) km/h")',
+                  ),
+              ],
+              "NexoraTeleport/Views/RoutePreviewView.swift": [
+                  (
+                      'LabeledContent("Distance", value: "\\(route.distanceMeters / 1000, specifier: "%.1f") km")',
+                      'LabeledContent("Distance", value: "\\((route.distanceMeters / 1000).formatted(.number.precision(.fractionLength(1)))) km")',
+                  ),
+                  (
+                      'LabeledContent("Speed", value: "\\(route.targetSpeedKmh, specifier: "%.0f") km/h")',
+                      'LabeledContent("Speed", value: "\\(route.targetSpeedKmh.formatted(.number.precision(.fractionLength(0)))) km/h")',
+                  ),
+              ],
+          }
+
+          for filename, fixes in replacements.items():
+              path = Path(filename)
+              text = path.read_text()
+              for old, new in fixes:
+                  if old in text:
+                      text = text.replace(old, new)
+              path.write_text(text)
+
+          plist = Path("NexoraTeleport/Info.plist")
+          text = plist.read_text()
+          if "<key>CFBundleExecutable</key>" not in text:
+              text = text.replace(
+                  "<key>CFBundleDisplayName</key>",
+                  "<key>CFBundleExecutable</key>\n\t<string>$(EXECUTABLE_NAME)</string>\n\t<key>CFBundleDisplayName</key>",
+              )
+          plist.write_text(text)
+
+          project = Path("NexoraTeleport.xcodeproj/project.pbxproj")
+          text = project.read_text()
+          import re
+          text = re.sub(r"CURRENT_PROJECT_VERSION = [^;]+;", "CURRENT_PROJECT_VERSION = 4;", text)
+          text = re.sub(r"MARKETING_VERSION = [^;]+;", "MARKETING_VERSION = 2.1.1;", text)
+          project.write_text(text)
+          PY
+
+      - name: Install Nexora app icon
+        run: |
+          set -euo pipefail
+          ICON_DIR="$GITHUB_WORKSPACE/NexoraTeleport/Assets.xcassets/AppIcon.appiconset"
+          SOURCE="$RUNNER_TEMP/Nexora-AppIcon-Source.png"
+
+          curl --fail --location --retry 3 \
+            "https://raw.githubusercontent.com/pawnsocks/nexoraipa/main/NexoraHost-AppIcon-Source.png" \
+            --output "$SOURCE"
+
+          test -s "$SOURCE"
+          sips -g pixelWidth -g pixelHeight "$SOURCE"
+          mkdir -p "$ICON_DIR"
+
+          sips -s format png -z 40 40 "$SOURCE" --out "$ICON_DIR/icon-20@2x.png" >/dev/null
+          sips -s format png -z 60 60 "$SOURCE" --out "$ICON_DIR/icon-20@3x.png" >/dev/null
+          sips -s format png -z 58 58 "$SOURCE" --out "$ICON_DIR/icon-29@2x.png" >/dev/null
+          sips -s format png -z 87 87 "$SOURCE" --out "$ICON_DIR/icon-29@3x.png" >/dev/null
+          sips -s format png -z 80 80 "$SOURCE" --out "$ICON_DIR/icon-40@2x.png" >/dev/null
+          sips -s format png -z 120 120 "$SOURCE" --out "$ICON_DIR/icon-40@3x.png" >/dev/null
+          sips -s format png -z 120 120 "$SOURCE" --out "$ICON_DIR/icon-60@2x.png" >/dev/null
+          sips -s format png -z 180 180 "$SOURCE" --out "$ICON_DIR/icon-60@3x.png" >/dev/null
+          sips -s format png -z 1024 1024 "$SOURCE" --out "$ICON_DIR/icon-1024.png" >/dev/null
+
+          cat > "$ICON_DIR/Contents.json" <<'JSON'
+          {
+            "images": [
+              {"idiom":"iphone","size":"20x20","scale":"2x","filename":"icon-20@2x.png"},
+              {"idiom":"iphone","size":"20x20","scale":"3x","filename":"icon-20@3x.png"},
+              {"idiom":"iphone","size":"29x29","scale":"2x","filename":"icon-29@2x.png"},
+              {"idiom":"iphone","size":"29x29","scale":"3x","filename":"icon-29@3x.png"},
+              {"idiom":"iphone","size":"40x40","scale":"2x","filename":"icon-40@2x.png"},
+              {"idiom":"iphone","size":"40x40","scale":"3x","filename":"icon-40@3x.png"},
+              {"idiom":"iphone","size":"60x60","scale":"2x","filename":"icon-60@2x.png"},
+              {"idiom":"iphone","size":"60x60","scale":"3x","filename":"icon-60@3x.png"},
+              {"idiom":"ios-marketing","size":"1024x1024","scale":"1x","filename":"icon-1024.png"}
+            ],
+            "info": {"author":"xcode","version":1}
+          }
+          JSON
+
+      - name: Validate project metadata
+        run: |
+          plutil -lint NexoraTeleport/Info.plist
+          plutil -lint NexoraTeleport/WidgetExtension/Info.plist
+          xcodebuild -version
+          xcodebuild -project NexoraTeleport.xcodeproj -list
+
+      - name: Build unsigned iPhone app
+        run: |
+          set -o pipefail
+          rm -rf "$GITHUB_WORKSPACE/build"
+
           xcodebuild \
             -project NexoraTeleport.xcodeproj \
             -scheme NexoraTeleport \
@@ -21,3 +144,52 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
             build
+
+      - name: Validate built app for Xenora and zsign
+        run: |
+          set -euo pipefail
+          APP_PATH=$(find "$GITHUB_WORKSPACE/build/Build/Products/Release-iphoneos" -maxdepth 2 -type d -name "NexoraTeleport.app" | head -n 1)
+
+          if [ -z "$APP_PATH" ]; then
+            echo "NexoraTeleport.app was not found"
+            exit 1
+          fi
+
+          INFO="$APP_PATH/Info.plist"
+          BUNDLE_ID=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$INFO")
+          VERSION=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$INFO")
+          SHORT_VERSION=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$INFO")
+          EXECUTABLE=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleExecutable' "$INFO")
+
+          echo "Bundle ID: $BUNDLE_ID"
+          echo "Version: $SHORT_VERSION ($VERSION)"
+          echo "Executable: $EXECUTABLE"
+
+          test -n "$BUNDLE_ID"
+          test -n "$VERSION"
+          test -n "$EXECUTABLE"
+          test -f "$APP_PATH/$EXECUTABLE"
+
+          echo "APP_PATH=$APP_PATH" >> "$GITHUB_ENV"
+
+      - name: Create IPA
+        run: |
+          set -euo pipefail
+          rm -rf "$GITHUB_WORKSPACE/ipa"
+          mkdir -p "$GITHUB_WORKSPACE/ipa/Payload"
+          cp -R "$APP_PATH" "$GITHUB_WORKSPACE/ipa/Payload/NexoraTeleport.app"
+
+          cd "$GITHUB_WORKSPACE/ipa"
+          /usr/bin/zip -r -9 "$GITHUB_WORKSPACE/NexoraTeleport-2.1.1-unsigned.ipa" Payload
+
+          cd "$GITHUB_WORKSPACE"
+          unzip -t NexoraTeleport-2.1.1-unsigned.ipa
+          ls -lh NexoraTeleport-2.1.1-unsigned.ipa
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: NexoraTeleport-2.1.1-unsigned-IPA
+          path: NexoraTeleport-2.1.1-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 7
