@@ -26,6 +26,57 @@ jobs:
             -project NexoraTeleport.xcodeproj \
             -list
 
+      - name: Patch known Xcode compile issues
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          fixes = {
+              "NexoraTeleport/Services/Engine.swift": [
+                  (
+                      r'''runtime.targetDates = Dictionary(uniqueKeysWithValues: keep)''',
+                      r'''runtime.targetDates = Dictionary(uniqueKeysWithValues: keep.map { ($0.key, $0.value) })'''
+                  ),
+              ],
+              "NexoraTeleport/Views/StatusView.swift": [
+                  (
+                      r'''LabeledContent("Speed", value: "\(location.speedKmh, specifier: "%.1f") km/h")''',
+                      r'''LabeledContent("Speed", value: "\(location.speedKmh.formatted(.number.precision(.fractionLength(1)))) km/h")'''
+                  ),
+              ],
+              "NexoraTeleport/Views/TodayView.swift": [
+                  (
+                      r'''metric("Speed", "\(route.targetSpeedKmh, specifier: "%.0f") km/h")''',
+                      r'''metric("Speed", "\(route.targetSpeedKmh.formatted(.number.precision(.fractionLength(0)))) km/h")'''
+                  ),
+                  (
+                      r'''metric("Speed", "\(location.speedKmh, specifier: "%.1f") km/h")''',
+                      r'''metric("Speed", "\(location.speedKmh.formatted(.number.precision(.fractionLength(1)))) km/h")'''
+                  ),
+              ],
+              "NexoraTeleport/Views/RoutePreviewView.swift": [
+                  (
+                      r'''LabeledContent("Distance", value: "\(route.distanceMeters / 1000, specifier: "%.1f") km")''',
+                      r'''LabeledContent("Distance", value: "\((route.distanceMeters / 1000).formatted(.number.precision(.fractionLength(1)))) km")'''
+                  ),
+                  (
+                      r'''LabeledContent("Speed", value: "\(route.targetSpeedKmh, specifier: "%.0f") km/h")''',
+                      r'''LabeledContent("Speed", value: "\(route.targetSpeedKmh.formatted(.number.precision(.fractionLength(0)))) km/h")'''
+                  ),
+              ],
+          }
+
+          for filename, replacements in fixes.items():
+              path = Path(filename)
+              text = path.read_text()
+              for old, new in replacements:
+                  if old not in text:
+                      raise SystemExit(f"Expected source line not found in {filename}: {old}")
+                  text = text.replace(old, new)
+              path.write_text(text)
+              print(f"Patched {filename}")
+          PY
+
       - name: Build Nexora Teleport
         run: |
           set -o pipefail
