@@ -88,7 +88,7 @@ final class SearchService: NSObject, ObservableObject, MKLocalSearchCompleterDel
             if let mkError = error as? MKError, mkError.code != .placemarkNotFound {
                 throw NSError(
                     domain: "NexoraTeleport.Search",
-                    code: mkError.code.rawValue,
+                    code: Int(mkError.code.rawValue),
                     userInfo: [NSLocalizedDescriptionKey: friendlyMessage(for: error)]
                 )
             }
@@ -145,7 +145,7 @@ final class SearchService: NSObject, ObservableObject, MKLocalSearchCompleterDel
         } catch {
             throw NSError(
                 domain: "NexoraTeleport.Search",
-                code: (error as? MKError)?.code.rawValue ?? 1,
+                code: Int((error as? MKError)?.code.rawValue ?? 1),
                 userInfo: [NSLocalizedDescriptionKey: friendlyMessage(for: error)]
             )
         }
