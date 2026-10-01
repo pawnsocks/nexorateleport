@@ -111,18 +111,18 @@ jobs:
 
       - name: Create unsigned IPA
         run: |
-          rm -rf "$PWD/ipa"
-          mkdir -p "$PWD/ipa/Payload"
+          rm -rf "$GITHUB_WORKSPACE/ipa"
+          mkdir -p "$GITHUB_WORKSPACE/ipa/Payload"
 
-          cp -R "$APP_PATH" "$PWD/ipa/Payload/NexoraTeleport.app"
+          cp -R "$APP_PATH" "$GITHUB_WORKSPACE/ipa/Payload/NexoraTeleport.app"
 
-          cd "$PWD/ipa"
-          zip -r -9 "$PWD/NexoraTeleport-unsigned.ipa" Payload
+          cd "$GITHUB_WORKSPACE/ipa"
+          zip -r -9 "$GITHUB_WORKSPACE/NexoraTeleport-unsigned.ipa" Payload
 
       - name: Verify IPA
         run: |
-          ls -lh NexoraTeleport-unsigned.ipa
-          unzip -l NexoraTeleport-unsigned.ipa | head -n 50
+          ls -lh "$GITHUB_WORKSPACE/NexoraTeleport-unsigned.ipa"
+          unzip -l "$GITHUB_WORKSPACE/NexoraTeleport-unsigned.ipa" | head -n 50
 
       - name: Upload IPA
         uses: actions/upload-artifact@v4
